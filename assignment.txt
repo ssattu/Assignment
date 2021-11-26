@@ -11,11 +11,10 @@ Note that the Employees relation describes pilots and other kinds of employees
 aswell; every pilot is certified for some aircraft, and only pilots are certified to
 fly.Write each of the following queries in SQL.
 
-
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 a. Find the names of aircraft such that all pilots certified to operate them earn more than $10,00,000.
 sol. airlines=# select a_name from aircraft join certified using (a_id) join employees using (e_id) where salary>10,00,000;
-  a_name   
------------
+  a_name  
  indigo
  indigo
  airlindia
@@ -24,6 +23,7 @@ sol. airlines=# select a_name from aircraft join certified using (a_id) join emp
 (5 rows)
 
 
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 b. For each pilot who is certified for more than one aircraft, find the eid and the
 maximum cruisingrange of the aircraft for which she or he is certified.
 sol.  airlines=# select e_id, max(cruisingrange) from employees join certified using (e_id) join aircraft using (a_id) group by e_id having count(e_id) >1;
@@ -37,6 +37,7 @@ sol.  airlines=# select e_id, max(cruisingrange) from employees join certified u
 (5 rows)
 
 
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 c. Find the names of pilots whose salary is less than the price of the cheapest route from Los Angeles to Honolulu.
 sol.  airlines=# select e_name from employees where salary < ( select price from flight where f_from = 'los angeles' and f_to = 'honolulu');
   e_name  
@@ -50,3 +51,62 @@ sol.  airlines=# select e_name from employees where salary < ( select price from
  nikhil
  nikhil
 (8 rows)
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+d. For all aircraft with cruisingrange over 1000 miles, find the name of the aircraft and the average salary of all pilots certified for this aircraft.
+sol.   airlines=# select a_name, avg(salary) from aircraft  join certified using(a_id) join employees using(e_id) group by a_name, cruisingrange having cruisingrange > 1000
+;
+  a_name   |         avg          
+-----------+----------------------
+ vistara   | 1000000.000000000000
+ indigo    | 2000000.000000000000
+ airlindia | 1750000.000000000000
+ trujet    | 1000000.000000000000
+ spicejet  | 1000000.000000000000
+(5 rows)
+
+airlines=# select a_name, avg(salary) from aircraft  join certified using(a_id) join employees using(e_id) group by a_name, cruisingrange having cruisingrange > 3000
+;
+  a_name   |         avg          
+-----------+----------------------
+ vistara   | 1000000.000000000000
+ indigo    | 2000000.000000000000
+ airlindia | 1750000.000000000000
+ trujet    | 1000000.000000000000
+ spicejet  | 1000000.000000000000
+(5 rows)
+
+airlines=# select a_name, avg(salary) from aircraft  join certified using(a_id) join employees using(e_id) group by a_name, cruisingrange having cruisingrange > 4000
+;
+ a_name | avg 
+--------+-----
+(0 rows)
+
+airlines=# select a_name, avg(salary) from aircraft  join certified using(a_id) join employees using(e_id) group by a_name, cruisingrange having cruisingrange > 3500
+;
+  a_name   |         avg          
+-----------+----------------------
+ indigo    | 2000000.000000000000
+ airlindia | 1750000.000000000000
+(2 rows)
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+e. Find the names of pilots certified for some Boeing aircraft.
+sol.    airlines=# select e_name from employees join certified using (e_id) join aircraft using (a_id)  where a_name = 'indigo';
+ e_name 
+--------
+ mohit
+ sohit
+(2 rows)
+
+
+airlines=# select * from employees join certified using (e_id) join aircraft using (a_id)  where a_name = 'indigo';
+ a_id | e_id | e_name | salary  | a_name | cruisingrange 
+------+------+--------+---------+--------+---------------
+ 1001 |  100 | mohit  | 2000000 | indigo |          4000
+ 1001 |  101 | sohit  | 2000000 | indigo |          4000
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
