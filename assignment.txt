@@ -120,3 +120,12 @@ sol.    airlines=# select a_id from aircraft where cruisingrange >= (select dist
 
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+g. Identify the routes that can be piloted by every pilot who makes more than $100,000.
+Sol.  airlines=# select e_name from employees join certified using(e_id) join aircraft using (a_id) where cruisingrange > 3500 and a_name <> 'indigo';
+ e_name 
+--------
+ sohit
+ rohit
+ mohit
+ nikhil
+(4 rows)
