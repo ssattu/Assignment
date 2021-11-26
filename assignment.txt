@@ -35,3 +35,18 @@ sol.  airlines=# select e_id, max(cruisingrange) from employees join certified u
   106 | 3500
   100 | 4000
 (5 rows)
+
+
+c. Find the names of pilots whose salary is less than the price of the cheapest route from Los Angeles to Honolulu.
+sol.  airlines=# select e_name from employees where salary < ( select price from flight where f_from = 'los angeles' and f_to = 'honolulu');
+  e_name  
+----------
+ prohit
+ shubham
+ shubhash
+ mohan
+ sohan
+ mukul
+ nikhil
+ nikhil
+(8 rows)
