@@ -110,3 +110,13 @@ airlines=# select * from employees join certified using (e_id) join aircraft usi
 
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+f. Find the aids of all aircraft that can be used on routes from Los Angeles to honolulu.
+sol.    airlines=# select a_id from aircraft where cruisingrange >= (select distance from flight where f_from ='los angeles' and f_to ='honolulu');
+ a_id 
+------
+ 1001
+ 1002
+(2 rows)
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
