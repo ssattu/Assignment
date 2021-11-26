@@ -22,3 +22,16 @@ sol. airlines=# select a_name from aircraft join certified using (a_id) join emp
  airlindia
  airlindia
 (5 rows)
+
+
+b. For each pilot who is certified for more than one aircraft, find the eid and the
+maximum cruisingrange of the aircraft for which she or he is certified.
+sol.  airlines=# select e_id, max(cruisingrange) from employees join certified using (e_id) join aircraft using (a_id) group by e_id having count(e_id) >1;
+ e_id | max  
+------+------
+  107 | 3500
+  101 | 4000
+  109 | 3500
+  106 | 3500
+  100 | 4000
+(5 rows)
