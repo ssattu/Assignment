@@ -1,0 +1,24 @@
+Questions
+1. The following relations keep track of airline flight information:
+Flights(flno: integer, from: string, to: string, distance: integer, departs:
+time,
+arrives: time, price: integer)
+Aircraft(aid: integer, aname: string, cruisingrange: integer)
+Certified(eid: integer, aid: integer)
+Employees(eid: integer, ename: string, salary: integer)
+
+Note that the Employees relation describes pilots and other kinds of employees
+aswell; every pilot is certified for some aircraft, and only pilots are certified to
+fly.Write each of the following queries in SQL.
+
+
+a. Find the names of aircraft such that all pilots certified to operate them earn more than $10,00,000.
+sol. airlines=# select a_name from aircraft join certified using (a_id) join employees using (e_id) where salary>10,00,000;
+  a_name   
+-----------
+ indigo
+ indigo
+ airlindia
+ airlindia
+ airlindia
+(5 rows)
