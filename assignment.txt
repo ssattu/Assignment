@@ -150,3 +150,13 @@ sol.  select distinct e_name from employees join certified using (e_id) join air
 (2 rows)
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+l. Print the names of employees who are certified only on aircrafts with cruising range longer than 1000 miles.
+sol. select distinct e_name from employees join certified using (e_id) join aircraft using (a_id) where cruisingrange > 3500;
+ e_name 
+--------
+ mohit
+ rohit
+ sohit
+ nikhil
+(4 rows)
+
