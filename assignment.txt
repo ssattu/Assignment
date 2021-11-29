@@ -120,7 +120,7 @@ sol.    airlines=# select a_id from aircraft where cruisingrange >= (select dist
 
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-g. Identify the routes that can be piloted by every pilot who makes more than $100,000.
+h. Print the enames of pilots who can operate planes with cruisingrange greater than 3000 miles but are not certified on any Boeing aircraft.
 Sol.  airlines=# select e_name from employees join certified using(e_id) join aircraft using (a_id) where cruisingrange > 3500 and a_name <> 'indigo';
  e_name 
 --------
@@ -140,3 +140,13 @@ sol.   airlines=# select departs from flight where f_from = 'delhi' and arrives 
  10:10:10
 (1 row)
 
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+n. Print the names of employees who are certified only on aircrafts with cruisingrange longer than 1000 miles and who are certified on some Boeing aircraft.
+sol.  select distinct e_name from employees join certified using (e_id) join aircraft using (a_id) where cruisingrange >1000 and a_name = 'indigo';
+ e_name 
+--------
+ mohit
+ sohit
+(2 rows)
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
