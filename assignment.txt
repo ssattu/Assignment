@@ -169,3 +169,14 @@ airlines-# (select avg(salary) avgsal from employees ) as employee;
 ----------------------
  -251298.701298701298
 (1 row)
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+g. Identify the routes that can be piloted by every pilot who makes more than
+$100,000.
+sol.  select f_from, f_to from flight where distance < (select min(cruisingrange) from aircraft join certified using(a_id) join employees using(e_id) where salary >1000000);
+ f_from |  f_to   
+--------+---------
+ delhi  | mumbai
+ delhi  | chennai
+ bhutan | bangal
+(3 rows)
