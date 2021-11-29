@@ -160,3 +160,12 @@ sol. select distinct e_name from employees join certified using (e_id) join airc
  nikhil
 (4 rows)
 
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+j. Compute the difference between the average salary of a pilot and the average salary of all employees (including pilots).
+sol. airlines=# select employee.avgsal - pilot.avgsal as diff_sal from 
+airlines-# (select avg(salary) avgsal from employees where e_id in (select e_id from certified)) as pilot,
+airlines-# (select avg(salary) avgsal from employees ) as employee;
+       diff_sal       
+----------------------
+ -251298.701298701298
+(1 row)
